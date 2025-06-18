@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi-hole Installation Service by [Your Name]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 960px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #0779e4 3px solid;
+        }
+
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+
+        header #branding {
+            float: left;
+        }
+
+        header #branding h1 {
+            margin: 0;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        #showcase {
+            min-height: 400px;
+            background: url('https://via.placeholder.com/1500x500.png?text=Your+Ad-Free+Internet+Starts+Here!') center center/cover no-repeat; /* Replace with a real, relevant image if you have one! */
+            text-align: center;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        #showcase h1 {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        #showcase p {
+            font-size: 20px;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px 0;
+            background: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #0779e4;
+            border-bottom: 2px solid #0779e4;
+            padding-bottom: 5px;
+        }
+        
+        .service-box {
+            background: #e9f5ff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #0779e4;
+        }
+
+        .concern-box {
+            background: #fff3cd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #ffc107;
+        }
+        .concern-box strong {
+            color: #856404;
+        }
+        .concern-box .solution {
+            color: #155724; /* Green for solution */
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        ul.benefits-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        ul.benefits-list li::before {
+            content: '✔';
+            color: green;
+            position: absolute;
+            left: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #0779e4;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background: #055aab;
+        }
+
+        footer {
+            padding: 20px;
+            margin-top: 20px;
+            color: #ffffff;
+            background-color: #35424a;
+            text-align: center;
+        }
+
+        /* Responsive adjustments */
+        @media(max-width: 768px){
+            header #branding,
+            header nav,
+            header nav li {
+                float: none;
+                text-align: center;
+                width: 100%;
+            }
+            header nav li {
+                display: block;
+                padding: 10px 0;
+            }
+            .container {
+                width: 95%;
+            }
+            #showcase h1 {
+                font-size: 35px;
+            }
+            #showcase p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="#">Your Pi-hole Pro: [Your Name]</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about-pihole">What's Pi-hole?</a></li>
+                    <li><a href="#concerns">Worried?</a></li>
+                    <li><a href="#services">My Service</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="showcase">
+        <div class="container">
+            <h1>Tired of Ads? Reclaim Your Internet!</h1>
+            <p>Get a faster, cleaner, and more private online experience with a professionally installed Pi-hole. I'm [Your Name], and I'm here to set it up for you, hardware included, hassle-free!</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="about-pihole">
+            <h2>What is Pi-hole & Why Do You Want It?</h2>
+            <p>Pi-hole is a powerful piece of software that acts as a **network-wide ad blocker**. Instead of installing ad-blocker browser extensions on every single computer and phone in your house, Pi-hole protects ALL devices connected to your home Wi-Fi. This includes smart TVs, gaming consoles, and other IoT devices!</p>
+            <h3>Key Benefits:</h3>
+            <ul class="benefits-list">
+                <li><strong>Block Ads Everywhere:</strong> Say goodbye to annoying banners, pop-ups, and video ads on websites and even in many apps.</li>
+                <li><strong>Speed Up Your Internet:</strong> Web pages load faster because they're not bogged down by ad content.</li>
+                <li><strong>Enhance Your Privacy:</strong> Pi-hole can block trackers that advertisers use to follow you around the web.</li>
+                <li><strong>Protect Your Network:</strong> It can even block known malicious domains, adding a layer of security.</li>
+                <li><strong>Family-Friendly:</strong> Reduce exposure to inappropriate ad content for children.</li>
+                <li><strong>Works on All Devices:</strong> Computers, phones, tablets, smart TVs – if it's on your Wi-Fi, it's protected.</li>
+            </ul>
+        </section>
+
+        <section id="concerns">
+            <h2>Common Concerns & How I Help</h2>
+            <p>You might have some questions or worries. That's completely normal! Here's how I address them:</p>
+
+            <div class="concern-box">
+                <strong>Concern: "Will it block ads in social media apps like YouTube, Facebook, Instagram, or TikTok?"</strong>
+                <p>This is a common question! Pi-hole blocks ads by preventing your devices from connecting to known ad-serving domains.
+                   <br>- For <strong>web browser versions</strong> of these platforms (e.g., watching YouTube on Chrome), Pi-hole is quite effective at blocking banner and pre-roll video ads.
+                   <br>- For <strong>mobile apps</strong> (like the YouTube, Facebook, or Instagram app), it's more challenging. These apps often serve ads from the same domains as their main content, or use deeply integrated ad systems. Blocking these aggressively can sometimes cause parts of the app to not display or function correctly.
+                </p>
+                <p class="solution">Solution: While Pi-hole may not eliminate every single ad within these specific mobile apps (especially in-video ads on YouTube or sponsored posts in feeds), it will still significantly reduce ads on countless other websites, in many other apps, and across your entire network. You'll see a dramatic decrease in general web browsing ads, pop-ups, and trackers. For a more aggressive approach on specific apps, per-device solutions might still be needed, but Pi-hole provides a fantastic baseline of protection and cleanliness for your whole home.
+                </p>
+            </div>
+
+            <div class="concern-box">
+                <strong>Concern: "Will it cause issues with some websites or apps I use?"</strong>
+                <p>Occasionally, a website or app might rely on a domain that Pi-hole blocks, which could prevent some content from loading or a feature from working as expected. This is rare for essential functions.</p>
+                <p class="solution">Solution: I'll show you how to easily "whitelist" (allow) specific sites or temporarily disable Pi-hole if needed. It's a simple click! Plus, I'll help configure initial whitelists for common services during setup to minimize any interruptions.</p>
+            </div>
+
+            <div class="concern-box">
+                <strong>Concern: "Is it complicated to manage?"</strong>
+                <p>The idea of new network hardware or software can sound daunting if you're not tech-savvy.</p>
+                <p class="solution">Solution: Pi-hole is mostly "set it and forget it" after the initial setup. I'll handle the entire installation and configuration. I'll also give you a simple walkthrough of its web interface so you feel comfortable. And I'm available for follow-up questions!</p>
+            </div>
+
+            <div class="concern-box">
+                <strong>Concern: "What if I *want* to see an ad for a specific product or support a creator?"</strong>
+                <p>You might occasionally want to allow ads on a particular site or for a short period.</p>
+                <p class="solution">Solution: You can temporarily disable Pi-hole for a few minutes with a couple of clicks. I'll show you exactly how. It's very straightforward.</p>
+            </div>
+             <p><strong>My Commitment:</strong> My goal is to make this easy and beneficial for you. I'm not just installing software; I'm providing a service to improve your internet experience, and I'll be there to help you get comfortable with it.</p>
+        </section>
+
+        <section id="services">
+            <h2>My Pi-hole Installation Service Includes:</h2>
+            <p>I provide a complete, turn-key solution to get Pi-hole running seamlessly in your home.</p>
+            <div class="service-box">
+                <!-- <h3>Full Pi-hole Setup Package</h3> -->
+                <ul>
+                    <li><strong>Consultation:</strong> A brief chat to understand your internet setup and ad-blocking goals.</li>
+                    <li><strong>Hardware Provided:</strong> A brand new Raspberry Pi (typically a Pi Zero 2 W or similar, suitable for Pi-hole), SD card, power supply, and case are all included. No need to buy anything extra!</li>
+                    <li><strong>Pi-hole Software Installation:</strong> Installation of the latest stable version of Pi-hole.</li>
+                    <li><strong>Network Configuration:</strong> Expert setup of your router to use Pi-hole as its DNS server. This is crucial for network-wide blocking.</li>
+                    <li><strong>Basic Customization:</strong> Adding common whitelist/blacklist entries to get you started smoothly.</li>
+                    <li><strong>User Walkthrough:</strong> A clear, simple demonstration of the Pi-hole dashboard, how to whitelist/blacklist domains, and how to temporarily disable ad-blocking if needed.</li>
+                    <li><strong>Post-Installation Support:</strong> Up to [e.g., 2 weeks] of text/email support for any initial questions or minor adjustments.</li>
+                </ul>
+                <p><strong>Pricing:</strong> Service cost is determined on a case-by-case basis. Please contact me for a friendly, no-obligation chat and a personalized quote for your home setup!</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Ready for an Ad-Free Internet? Let's Talk!</h2>
+            <p>I'm doing this as a summer job and I'm eager to help my neighbors improve their online experience. If you're interested in getting Pi-hole set up, or just have more questions, please reach out!</p>
+            <p><strong>Contact [Your Name]:</strong></p>
+            <ul>
+                <li><strong>Phone:</strong> <a href="tel:[Your Phone Number]">[Your Phone Number]</a> (Call or Text)</li>
+                <li><strong>Email:</strong> <a href="mailto:[Your Email]">[Your Email]</a></li>
+            </ul>
+            <p>I can visit your home for the installation at a convenient time. Looking forward to hearing from you!</p>
+            <a href="tel:[Your Phone Number]" class="cta-button">Call Me Now for a Quote!</a>
+            <a href="mailto:[Your Email]" class="cta-button">Email Me for a Quote!</a>
+        </section>
+        
+        <section id="about-me">
+            <h2>About Me</h2>
+            <p>Hi, I'm [Your Name], a local [Student/Tech Enthusiast/etc.] passionate about technology and helping people make the most of it. This summer, I'm offering my skills to install and configure Pi-hole for homes in our community. I'm reliable, friendly, and committed to providing a great service.</p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 [Your Name] | Pi-hole Installation Service | [Your Town/Area]</p>
+    </footer>
+
+</body>
+</html>
