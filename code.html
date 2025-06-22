@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi-hole Installation Service by Henrik Schimmelbusch</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Lighter background */
+            color: #343a40; /* Darker grey for text */
+        }
+
+        .container {
+            width: 85%;
+            max-width: 1024px; /* Slightly wider max for modern feel */
+            margin: auto;
+            overflow: hidden;
+            padding: 0 25px;
+        }
+
+        header {
+            background: #343a40; /* Dark header */
+            color: #ffffff;
+            padding-top: 25px;
+            min-height: 70px;
+            border-bottom: #007bff 4px solid; /* Bootstrap primary blue for accent */
+        }
+
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        header a:hover {
+            color: #007bff;
+        }
+
+        header ul {
+            padding: 0;
+            list-style: none;
+            margin:0;
+        }
+
+        header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+
+        header #branding {
+            float: left;
+        }
+
+        header #branding h1 {
+            margin: 0;
+            font-size: 28px; /* Slightly larger */
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        #showcase {
+            min-height: 450px; /* Taller showcase */
+            background: url('https://via.placeholder.com/1500x500.png?text=Your+Ad-Free+Internet+Starts+Here!') center center/cover no-repeat;
+            text-align: center;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7); /* More pronounced shadow */
+        }
+
+        #showcase h1 {
+            font-size: 60px; /* Larger showcase title */
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        #showcase p {
+            font-size: 22px; /* Larger showcase text */
+            max-width: 700px;
+        }
+
+        section {
+            padding: 25px;
+            margin: 25px 0;
+            background: #ffffff;
+            border-radius: 8px; /* Softer radius */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Softer shadow */
+        }
+
+        h2 {
+            color: #0056b3; /* Darker blue for headings */
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-top:0;
+            font-size: 28px;
+        }
+        
+        .service-box, .concern-box, .legal-box {
+            background: #ffffff; /* Keep clean white */
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .service-box:hover, .concern-box:hover, .legal-box:hover {
+            transform: scale(1.03); /* Gets slightly bigger */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .concern-box {
+            border-left-color: #ffc107; /* Warning yellow for concerns */
+        }
+        .concern-box strong {
+            color: #856404;
+        }
+        .concern-box .solution {
+            color: #155724; 
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        .legal-box {
+            border-left-color: #6c757d; /* Grey for legal */
+            font-size: 0.9em;
+        }
+        .legal-box a {
+            color: #0056b3;
+        }
+
+
+        ul.benefits-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        ul.benefits-list li::before {
+            content: '✔';
+            color: #28a745; /* Success green */
+            position: absolute;
+            left: 0;
+            font-size: 1.1em;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 15px;
+            margin-right: 10px; /* Spacing for multiple buttons */
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background: #0056b3; /* Darker blue on hover */
+            transform: scale(1.05); /* Gets slightly bigger */
+        }
+
+        footer {
+            padding: 25px;
+            margin-top: 30px;
+            color: #e9ecef;
+            background-color: #343a40;
+            text-align: center;
+        }
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Responsive adjustments */
+        @media(max-width: 768px){
+            header #branding,
+            header nav,
+            header nav li {
+                float: none;
+                text-align: center;
+                width: 100%;
+            }
+            header nav li {
+                display: block;
+                padding: 10px 0;
+            }
+            .container {
+                width: 95%;
+                padding: 0 15px;
+            }
+            #showcase h1 {
+                font-size: 40px;
+            }
+            #showcase p {
+                font-size: 18px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            .cta-button {
+                display: block; /* Stack buttons on mobile */
+                width: calc(100% - 50px); /* Adjust width considering padding */
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="#">Henrik Schimmelbusch</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about-pihole">What's Pi-hole?</a></li>
+                    <li><a href="#concerns">Worried?</a></li>
+                    <li><a href="#services">My Service</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="showcase">
+        <div class="container">
+            <h1>Tired of Ads? Reclaim Your Internet!</h1>
+            <p>Get a faster, cleaner, and more private online experience with Pi-hole. I'm Henrik Schimmelbusch, and I'm here to set it up for you, hardware included, hassle-free!</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="about-pihole">
+            <h2>What is Pi-hole & Why Do You Want It?</h2>
+            <p>Pi-hole is a powerful piece of software that acts as a **network-wide ad blocker**. Instead of installing ad-blocker browser extensions on every single computer and phone in your house, Pi-hole protects ALL devices connected to your home Wi-Fi. This includes smart TVs, gaming consoles, and other IoT devices!</p>
+            <h3>Key Benefits:</h3>
+            <ul class="benefits-list">
+                <li><strong>Dramatically Reduce Ads Across Your Network:</strong> Experience a significantly cleaner internet on all your connected devices. Pi-hole effectively blocks a vast majority of ads in web browsers (banners, pop-ups, many video pre-rolls) and can also reduce ads in numerous other apps by blocking known ad-serving domains at the network level.</li>
+                <li><strong>Speed Up Your Internet:</strong> Web pages load faster because they're not bogged down by ad content.</li>
+                <li><strong>Enhance Your Privacy:</strong> Pi-hole can block trackers that advertisers use to follow you around the web.</li>
+                <li><strong>Protect Your Network:</strong> It can even block known malicious domains, adding a layer of security.</li>
+                <li><strong>Family-Friendly:</strong> Reduce exposure to inappropriate ad content for children.</li>
+                <li><strong>Works on All Devices:</strong> Computers, phones, tablets, smart TVs – if it's on your Wi-Fi, it's generally protected by Pi-hole's network-level filtering.</li>
+            </ul>
+        </section>
+
+        <section id="concerns">
+            <h2>Common Concerns & How I Help</h2>
+            <p>You might have some questions or worries. That's completely normal! Here's how I address them:</p>
+
+            <div class="concern-box">
+                <strong>Concern: "Will it block ads in social media apps like YouTube, Facebook, Instagram, or TikTok?"</strong>
+                <p>This is a common question! Pi-hole blocks ads by preventing your devices from connecting to known ad-serving domains.
+                   <br>- For <strong>web browser versions</strong> of these platforms (e.g., watching YouTube on Chrome), Pi-hole is quite effective at blocking banner and pre-roll video ads.
+                   <br>- For <strong>mobile apps</strong> (like the YouTube, Facebook, or Instagram app), it's more challenging. These apps often serve ads from the same domains as their main content, or use deeply integrated ad systems. Blocking these aggressively can sometimes cause parts of the app to not display or function correctly.
+                </p>
+                <p class="solution">Solution: While Pi-hole may not eliminate every single ad within these specific mobile apps (especially in-video ads on YouTube or sponsored posts in feeds), it will still significantly reduce ads on countless other websites, in many other apps, and across your entire network. You'll see a dramatic decrease in general web browsing ads, pop-ups, and trackers. Pi-hole provides a fantastic baseline of protection and cleanliness for your whole home.
+                </p>
+            </div>
+
+            <div class="concern-box">
+                <strong>Concern: "What if the little Pi-hole device gets unplugged or has an issue? Will my internet stop working?"</strong>
+                <p>It's a smart question! We want your internet to be reliable.</p>
+                <p class="solution">Solution: Your internet reliability is important. If the Pi-hole device happens to go offline, your internet connection is designed to keep working after a short pause. During that time, you might notice ads temporarily, but your full ad-blocking will return automatically once the Pi-hole is active again.</p>
+            </div>
+
+            <div class="concern-box">
+                <strong>Concern: "Will it cause issues with some websites or apps I use?"</strong>
+                <p>Occasionally, a website or app might rely on a domain that Pi-hole blocks, which could prevent some content from loading or a feature from working as expected. This is rare for essential functions.</p>
+                <p class="solution">Solution: I'll show you how to easily "whitelist" (allow) specific sites or temporarily disable Pi-hole if needed. It's a simple click! Plus, I'll help configure initial whitelists for common services during setup to minimize any interruptions.</p>
+            </div>
+
+            <div class="concern-box">
+                <strong>Concern: "Is it complicated to manage?"</strong>
+                <p>The idea of new network hardware or software can sound daunting if you're not tech-savvy.</p>
+                <p class="solution">Solution: Pi-hole is mostly "set it and forget it" after the initial setup. I'll handle the entire installation and configuration. I'll also give you a simple walkthrough of its web interface so you feel comfortable. And I'm available for follow-up questions!</p>
+            </div>
+
+            <div class="concern-box">
+                <strong>Concern: "What if I *want* to see an ad for a specific product or support a creator?"</strong>
+                <p>You might occasionally want to allow ads on a particular site or for a short period.</p>
+                <p class="solution">Solution: You can temporarily disable Pi-hole for a few minutes with a couple of clicks. I'll show you exactly how. It's very straightforward.</p>
+            </div>
+             <p><strong>My Commitment:</strong> My goal is to make this easy and beneficial for you. I'm not just installing software; I'm providing a service to improve your internet experience, and I'll be there to help you get comfortable with it.</p>
+        </section>
+
+        <section id="services">
+            <h2>My Pi-hole Installation Service Includes:</h2>
+            <p>I provide a complete, turn-key solution to get Pi-hole running seamlessly in your home.</p>
+            <div class="service-box">
+                <ul>
+                    <li><strong>Consultation:</strong> A brief chat to understand your internet setup and ad-blocking goals.</li>
+                    <li><strong>Hardware Provided:</strong> A brand new Raspberry Pi (typically a Pi Zero 2 W or similar, suitable for Pi-hole), SD card, power supply, and case are all included. No need to buy anything extra!</li>
+                    <li><strong>Pi-hole Software Installation:</strong> Installation of the latest stable version of Pi-hole.</li>
+                    <li><strong>Network Configuration:</strong> Expert setup of your router to use Pi-hole as its primary address lookup, with a reliable public backup for uninterrupted internet access. This is crucial for network-wide blocking and resilience.</li>
+                    <li><strong>Basic Customization:</strong> Adding common whitelist/blacklist entries to get you started smoothly.</li>
+                    <li><strong>User Walkthrough:</strong> A clear, simple demonstration of the Pi-hole dashboard, how to whitelist/blacklist domains, and how to temporarily disable ad-blocking if needed.</li>
+                    <li><strong>Post-Installation Support:</strong> Up to 30 days of text/email support for any initial questions or minor adjustments.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Ready for an Ad-Free Internet? Let's Talk!</h2>
+            <p>I'm eager to help my neighbors improve their online experience. If you're interested in getting Pi-hole set up, or just have more questions, please reach out!</p>
+            <p><strong>Contact Henrik Schimmelbusch:</strong></p>
+            <ul>
+                <li><strong>Phone:</strong> <a href="tel:9714594086">971-459-4086</a> (Call or Text)</li>
+                <li><strong>Email:</strong> <a href="mailto:gowithoutads@gmail.com">gowithoutads@gmail.com</a></li>
+            </ul>
+            <p>I can visit your home for the installation at a convenient time. Looking forward to hearing from you!</p>
+            <a href="tel:9714594086" class="cta-button">Call Me Now!</a>
+            <a href="mailto:gowithoutads@gmail.com" class="cta-button">Email Me!</a>
+        </section>
+        
+        <section id="about-me">
+            <h2>About Me</h2>
+            <p>Hi, I'm Henrik Schimmelbusch, a local high school student and tech enthusiast from Lake Oswego. I enjoy sports, physical activity, and engineering. This summer, I'm offering my skills to install and configure Pi-hole for homes in our community. I'm reliable, friendly, and committed to providing a great service.</p>
+        </section>
+
+        <section id="legal-notice">
+            <h2>Important Notice Regarding Pi-hole® Software</h2>
+            <div class="legal-box">
+                <p>Pi-hole® is a registered trademark of Pi-hole, LLC. I, Henrik Schimmelbusch, operate as an independent installation service provider and am not affiliated with, endorsed by, or sponsored by Pi-hole, LLC.</p>
+                <p>The Pi-hole software is free and open-source, available under the European Union Public License v1.2 (EUPL v1.2). My service is for the provision of suitable hardware, my time and expertise for the installation, network configuration, and personalized support to help you get the most out of this excellent software.</p>
+                <p>You can learn more about the Pi-hole project, its features, and access its source code at the official website: <a href="https://pi-hole.net" target="_blank" rel="noopener noreferrer">https://pi-hole.net</a> and its GitHub repository: <a href="https://github.com/pi-hole/pi-hole" target="_blank" rel="noopener noreferrer">https://github.com/pi-hole/pi-hole</a>.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Henrik Schimmelbusch | Pi-hole Installation Service | Lake Oswego, Oregon</p>
+        <p><a href="#legal-notice">Pi-hole® Usage Disclaimer</a></p>
+    </footer>
+
+</body>
+</html>
